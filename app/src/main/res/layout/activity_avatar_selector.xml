@@ -5,8 +5,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/kitchen_background"
+    android:background="@drawable/kitchen_entry_background"
     tools:context=".AvatarSelector">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selecciona tu avatar"
+        android:textSize="50sp"
+        android:fontFamily="@font/poetsenone_regular"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"/>
 
     <!-- Flecha izquierda -->
     <ImageButton
@@ -30,7 +43,7 @@
         android:id="@+id/imageCarousel"
         android:layout_width="350dp"
         android:layout_height="500dp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
         android:src="@drawable/chef1_icon"
         android:contentDescription="imagen_carrusel"
         app:layout_constraintTop_toTopOf="parent"
@@ -54,5 +67,22 @@
         android:scaleType="fitCenter"
         android:rotation="90"/>
 
+    <Button
+        android:id="@+id/btnSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seleccionar"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="6dp"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/poetsenone_regular"
+        android:background="@drawable/btn_select_avatar"
+        app:backgroundTint="@android:color/holo_orange_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="25dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
