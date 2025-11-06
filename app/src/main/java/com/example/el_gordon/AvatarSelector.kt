@@ -1,6 +1,9 @@
 package com.example.el_gordon
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -23,11 +26,10 @@ class AvatarSelector : AppCompatActivity() {
         val imageCarousel = findViewById<ImageView>(R.id.imageCarousel)
         val btnLeft = findViewById<ImageButton>(R.id.btnLeft)
         val btnRight = findViewById<ImageButton>(R.id.btnRight)
+        val btnSelect = findViewById<Button>(R.id.btnSelect)
 
-        // Mostrar la primera imagen
         imageCarousel.setImageResource(images[currentIndex])
 
-        // Botón izquierdo
         btnLeft.setOnClickListener {
             currentIndex = if (currentIndex - 1 < 0) {
                 images.size - 1
@@ -37,10 +39,20 @@ class AvatarSelector : AppCompatActivity() {
             imageCarousel.setImageResource(images[currentIndex])
         }
 
-        // Botón derecho
         btnRight.setOnClickListener {
             currentIndex = (currentIndex + 1) % images.size
             imageCarousel.setImageResource(images[currentIndex])
+        }
+
+        btnSelect.setOnClickListener {
+            val selectedAvatar = images[currentIndex]
+
+            val prefs = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+            prefs.edit().putInt("selected_avatar", selectedAvatar).apply()
+
+            val intent = Intent(this, LevelSelector::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }
