@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/kitchen_entry_background"
+    tools:context=".AvatarSelector">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selecciona tu avatar"
+        android:textSize="50sp"
+        android:fontFamily="@font/poetsenone_regular"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"/>
+
+    <!-- Flecha izquierda -->
+    <ImageButton
+        android:id="@+id/btnLeft"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/arrow_icon256"
+        android:contentDescription="flecha_arriba"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/imageCarousel"
+        android:layout_marginEnd="16dp"
+        android:scaleType="fitCenter"
+        android:rotation="-90"
+        android:scaleX="-1"/>
+
+    <!-- Imagen del carrusel -->
+    <ImageView
+        android:id="@+id/imageCarousel"
+        android:layout_width="350dp"
+        android:layout_height="500dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/chef1_icon"
+        android:contentDescription="imagen_carrusel"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnLeft"
+        app:layout_constraintEnd_toStartOf="@id/btnRight" />
+
+    <!-- Flecha derecha -->
+    <ImageButton
+        android:id="@+id/btnRight"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/arrow_icon256"
+        android:contentDescription="flecha_abajo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageCarousel"
+        android:layout_marginStart="16dp"
+        android:scaleType="fitCenter"
+        android:rotation="90"/>
+
+    <Button
+        android:id="@+id/btnSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seleccionar"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="6dp"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/poetsenone_regular"
+        android:background="@drawable/btn_select_avatar"
+        app:backgroundTint="@android:color/holo_orange_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="25dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

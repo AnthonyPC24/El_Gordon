@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/kitchen_entry_background"
+    tools:context=".LevelSelector">
+
+    <!-- Imagen del avatar -->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="350dp"
+        android:layout_height="500dp"
+        android:layout_marginStart="100dp"
+        android:contentDescription="avatar_level_selector"
+        android:scaleType="fitCenter"
+        android:scaleX="-1"
+        android:src="@drawable/chef1_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Panel con texto y botones -->
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="500dp"
+        android:layout_height="700dp"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal"
+        app:layout_constraintStart_toEndOf="@id/imageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:elevation="6dp">
+
+        <!-- Texto principal -->
+        <TextView
+            android:id="@+id/tvNiveles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Niveles"
+            android:textSize="75sp"
+            android:fontFamily="@font/poetsenone_regular"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="24dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:baselineAligned="false">
+
+            <!-- Botón 1 -->
+            <Button
+                android:id="@+id/btnNivel1"
+                android:layout_width="250dp"
+                android:layout_height="65dp"
+                android:text="🌟"
+                android:textSize="18sp"
+                android:background="@drawable/btn_select_level"
+                app:backgroundTint="@color/dark_blue"
+                />
+
+            <!-- Botón 2 -->
+            <Button
+                android:id="@+id/btnNivel2"
+                android:layout_width="250dp"
+                android:layout_height="65dp"
+                android:text="🌟  🌟"
+                android:textSize="18sp"
+                android:layout_marginTop="75dp"
+                android:layout_marginBottom="75dp"
+                app:backgroundTint="@color/dark_blue"
+                android:background="@drawable/btn_select_level" />
+
+            <!-- Botón 3 -->
+            <Button
+                android:id="@+id/btnNivel3"
+                android:layout_width="250dp"
+                android:layout_height="65dp"
+                android:text=" 🌟  🌟  🌟 "
+                android:textSize="18sp"
+                app:backgroundTint="@color/dark_blue"
+                android:background="@drawable/btn_select_level" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
