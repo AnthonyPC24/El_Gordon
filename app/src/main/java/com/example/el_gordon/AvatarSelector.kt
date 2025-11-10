@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.tuapp.utils.hideSystemUI
 
 class AvatarSelector : AppCompatActivity() {
 
@@ -22,6 +23,7 @@ class AvatarSelector : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_avatar_selector)
+        hideSystemUI()
 
         val imageCarousel = findViewById<ImageView>(R.id.imageCarousel)
         val btnLeft = findViewById<ImageButton>(R.id.btnLeft)
@@ -51,7 +53,10 @@ class AvatarSelector : AppCompatActivity() {
             prefs.edit().putInt("selected_avatar", selectedAvatar).apply()
 
             val intent = Intent(this, LevelSelector::class.java)
+
             startActivity(intent)
+            @Suppress("DEPRECATION")
+            overridePendingTransition(0, 0)
             finish()
         }
     }

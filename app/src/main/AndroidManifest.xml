@@ -12,11 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.El_gordon">
         <activity
-            android:name=".MainActivity"
+            android:name=".LevelSelector"
             android:exported="true">
         </activity>
         <activity
-            android:name=".LevelSelector"
+            android:name=".MixIngredients"
             android:exported="true">
         </activity>
         <activity
