@@ -1,15 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:background="#222">
+    android:background="@drawable/kitchen_background"
+    tools:context=".JuegoActivity">
 
-    <TextView
+    <!-- Rejilla de ingredientes -->
+    <GridLayout
+        android:id="@+id/gridIngredientes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pantalla del juego"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp" />
-</LinearLayout>
+        android:columnCount="3"
+        android:rowCount="4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="60dp">
+
+        <!-- Ejemplo de ingredientes (sustituye por tus imágenes) -->
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/carne"
+            android:layout_margin="8dp" />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/platano"
+            android:layout_margin="8dp" />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/pimineto"
+            android:layout_margin="8dp" />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/champinyon"
+            android:layout_margin="8dp" />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/espaguetis"
+            android:layout_margin="8dp" />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/olla"
+            android:layout_margin="8dp" />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/calcetin"
+            android:layout_margin="8dp" />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/castanya"
+            android:layout_margin="8dp" />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/shoe_icon"
+            android:layout_margin="8dp" />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/pelo"
+            android:layout_margin="8dp" />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/plant_icon"
+            android:layout_margin="8dp" />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/cheese_icon"
+            android:layout_margin="8dp" />
+
+
+
+        <!-- puedes seguir añadiendo más imágenes así -->
+    </GridLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

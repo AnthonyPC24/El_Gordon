@@ -11,25 +11,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.El_gordon">
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".LevelSelector"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".RecipeSelector"
-            android:exported="true">
-        </activity>
-        <activity android:name=".AvatarSelector"
-            android:exported="true">
+
+        <activity android:name=".ResultadoNivel1Activity" android:exported="false" />
+        <activity android:name=".ResultadoNivel2Activity" android:exported="false" />
+        <activity android:name=".ResultadoNivel3Activity" android:exported="false" />
+
+
+        <!-- Última pantalla (el juego) -->
+        <activity android:name=".JuegoActivity" android:exported="false" />
+
+        <!-- Pantalla de recetas -->
+        <activity android:name=".RecipeSelector" android:exported="false" />
+
+        <!-- Pantalla de niveles -->
+        <activity android:name=".LevelSelector" android:exported="false" />
+
+        <!-- Pantalla de selección de avatar -->
+        <activity android:name=".AvatarSelector" android:exported="false" />
+
+        <!-- Pantalla de inicio (primera que se abre) -->
+        <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+    </application>
 </manifest>

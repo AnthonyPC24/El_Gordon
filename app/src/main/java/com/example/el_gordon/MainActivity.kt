@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
 
         val txtJugar = findViewById<TextView>(R.id.txtJugar)
         txtJugar.setOnClickListener {
-            val intent = Intent(this, JuegoActivity::class.java)
+            val intent = Intent(this, AvatarSelector::class.java)
             startActivity(intent)
         }
     }
