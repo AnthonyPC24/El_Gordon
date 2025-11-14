@@ -7,6 +7,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -226,41 +227,52 @@ class MixIngredients : AppCompatActivity() {
 
 
     private fun animateStarWithPotExplosion(pot: ImageView, star: ImageView) {
-        // 1️⃣ Retroceso lento de la olla
+        val cinta = findViewById<ImageView>(R.id.cinta)
+        val btnNext = findViewById<Button>(R.id.btn_next)
+
         val slowBackX = ObjectAnimator.ofFloat(pot, "scaleX", 1f, 0.9f).apply { duration = 600 }
         val slowBackY = ObjectAnimator.ofFloat(pot, "scaleY", 1f, 0.9f).apply { duration = 600 }
 
-        // 2️⃣ Expansión rápida (boom) de la olla
         val recipe = findViewById<ImageView>(R.id.recipe)
-        val quickExpandX = ObjectAnimator.ofFloat(recipe, "scaleX", 1.4f).apply { duration = 250 }
-        val quickExpandY = ObjectAnimator.ofFloat(recipe, "scaleY", 1.4f).apply { duration = 250 }
 
-        // Sincronizar estrella con la expansión de la olla
-        star.visibility = View.VISIBLE
+        recipe.scaleX = 0f
+        recipe.scaleY = 0f
         star.scaleX = 0f
         star.scaleY = 0f
-        val starGrowX = ObjectAnimator.ofFloat(star, "scaleX", 1f).apply { duration = 250 }
-        val starGrowY = ObjectAnimator.ofFloat(star, "scaleY", 1f).apply { duration = 250 }
 
-        // 3️⃣ Vuelve ligeramente al tamaño normal
-        val settleRecipeX = ObjectAnimator.ofFloat(recipe, "scaleX", 1.2f).apply { duration = 200 }
-        val settleRecipeY = ObjectAnimator.ofFloat(recipe, "scaleY", 1.2f).apply { duration = 200 }
-        recipe.visibility = View.VISIBLE
-        pot.visibility = View.INVISIBLE
-        // Combinar secuencias
+        val starGrowX = ObjectAnimator.ofFloat(star, "scaleX", 1.5f).apply { duration = 250 }
+        val starGrowY = ObjectAnimator.ofFloat(star, "scaleY", 1.5f).apply { duration = 250 }
+
+        val settleRecipeX = ObjectAnimator.ofFloat(recipe, "scaleX", 2f).apply { duration = 250 }
+        val settleRecipeY = ObjectAnimator.ofFloat(recipe, "scaleY", 2f).apply { duration = 250 }
+
+        val explosionSet = AnimatorSet().apply {
+            playTogether(
+                starGrowX,
+                starGrowY,
+                settleRecipeX,
+                settleRecipeY)
+
+            addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationStart(animation: android.animation.Animator) {
+                    pot.visibility = View.INVISIBLE
+                    recipe.visibility = View.VISIBLE
+                    star.visibility = View.VISIBLE
+                    cinta.visibility = View.VISIBLE
+                }
+            })
+        }
+
         val potSet = AnimatorSet()
         potSet.playSequentially(
             AnimatorSet().apply { playTogether(slowBackX, slowBackY) },
-            AnimatorSet().apply { playTogether(quickExpandX, quickExpandY, starGrowX, starGrowY) },
-            AnimatorSet().apply { playTogether(settleRecipeX, settleRecipeY) })
+            explosionSet)
 
         potSet.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: android.animation.Animator) {
-                super.onAnimationEnd(animation)
                 val rotate = ObjectAnimator.ofFloat(star, "rotation", 0f, 360f).apply {
                     duration = 3000
                     repeatCount = ObjectAnimator.INFINITE
-                    repeatMode = ObjectAnimator.RESTART
                 }
                 val pulseX = ObjectAnimator.ofFloat(star, "scaleX", 1f, 1.1f, 1f).apply {
                     duration = 1000
@@ -272,10 +284,22 @@ class MixIngredients : AppCompatActivity() {
                     repeatCount = ObjectAnimator.INFINITE
                     repeatMode = ObjectAnimator.REVERSE
                 }
-                AnimatorSet().apply { playTogether(rotate, pulseX, pulseY) }.start()
+
+                val pulseCX = ObjectAnimator.ofFloat(cinta, "scaleX", 1f, 1.1f, 1f).apply {
+                    duration = 1000
+                    repeatCount = ObjectAnimator.INFINITE
+                    repeatMode = ObjectAnimator.REVERSE
+                }
+                val pulseCY = ObjectAnimator.ofFloat(cinta, "scaleX", 1f, 1.1f, 1f).apply {
+                    duration = 1000
+                    repeatCount = ObjectAnimator.INFINITE
+                    repeatMode = ObjectAnimator.REVERSE
+                }
+                AnimatorSet().apply { playTogether(rotate, pulseX, pulseY, pulseCX, pulseCY) }.start()
             }
         })
-
         potSet.start()
+
+        btnNext.visibility = View.VISIBLE
     }
 }
