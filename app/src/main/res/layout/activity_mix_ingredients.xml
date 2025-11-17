@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/kitchen_background"
+    android:background="@drawable/kitchen"
     tools:context=".MixIngredients">
 
     <ImageView
@@ -19,7 +19,7 @@
         android:contentDescription="avatar_level_selector"
         android:scaleType="fitCenter"
         android:scaleX="-1"
-        android:src="@drawable/chef1_icon"
+        android:src="@drawable/chef_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -60,7 +60,7 @@
         android:visibility="invisible"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/steam_icon"
+        android:src="@drawable/steam"
         android:contentDescription="Vapor"
         android:layout_marginStart="320dp"
         app:layout_constraintTop_toTopOf="parent"
@@ -87,7 +87,7 @@
         android:visibility="invisible"
         android:layout_width="225dp"
         android:layout_height="225dp"
-        android:src="@drawable/pot_icon"
+        android:src="@drawable/pot"
         android:contentDescription="Olla"
         android:layout_marginStart="300dp"
         app:layout_constraintTop_toTopOf="parent"
@@ -100,7 +100,7 @@
         android:visibility="invisible"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/salmon_rice_recipe"
+        android:src="@drawable/recipe_milkshake3"
         android:contentDescription="Olla"
         android:layout_marginStart="300dp"
         android:layout_marginTop="150dp"
@@ -131,7 +131,7 @@
         android:visibility="invisible"
         android:src="@drawable/cinta_enhorabuena3"
         android:layout_marginStart="300dp"
-        android:layout_marginBottom="375dp"
+        android:layout_marginBottom="400dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

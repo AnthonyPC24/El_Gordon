@@ -4,10 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/storage_background"
+    android:background="@drawable/storage"
     tools:context=".RecipeSelector">
 
-    <Button
+    <TextView
         android:id="@+id/tvRecetas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,19 +18,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="45dp" />
+        android:layout_marginTop="60dp"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/contenedorInterno"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintWidth_percent="0.7"
         app:layout_constraintHeight_percent="0.7"
         app:layout_constraintTop_toBottomOf="@id/tvRecetas"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
-        <!-- android:background="@color/white" -->
 
         <GridLayout
             android:id="@+id/gridRecetas"
@@ -55,7 +55,7 @@
                 android:layout_margin="8dp"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
-                android:src="@drawable/star" />
+                android:src="@drawable/recipe_butter_bread1" />
 
             <ImageView
                 android:layout_width="0dp"
@@ -65,7 +65,7 @@
                 android:layout_margin="8dp"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
-                android:src="@drawable/star" />
+                android:src="@drawable/recipe_milkshake1" />
 
             <ImageView
                 android:layout_width="0dp"
@@ -75,7 +75,7 @@
                 android:layout_margin="8dp"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
-                android:src="@drawable/star" />
+                android:src="@drawable/recipe_pasta1" />
 
             <ImageView
                 android:layout_width="0dp"
@@ -85,7 +85,7 @@
                 android:layout_margin="8dp"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
-                android:src="@drawable/star" />
+                android:src="@drawable/recipe_rice1" />
 
             <ImageView
                 android:layout_width="0dp"
@@ -95,7 +95,7 @@
                 android:layout_margin="8dp"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
-                android:src="@drawable/star" />
+                android:src="@drawable/recipe_salad1" />
 
             <ImageView
                 android:layout_width="0dp"
@@ -105,7 +105,7 @@
                 android:layout_margin="8dp"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
-                android:src="@drawable/star" />
+                android:src="@drawable/recipe_omlete1" />
         </GridLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -31,13 +31,11 @@ class MixIngredients : AppCompatActivity() {
         val layout = findViewById<ConstraintLayout>(R.id.constraintLayout)
 
         val ingredients = listOf(
-            R.drawable.cheese_icon,
-            R.drawable.shoe_icon,
-            R.drawable.cheese_icon,
-            R.drawable.shoe_icon,
-            R.drawable.cheese_icon,
-            R.drawable.shoe_icon,
-            R.drawable.cheese_icon)
+            R.drawable.ing_cheese,
+            R.drawable.ing_bread,
+            R.drawable.ing_milk,
+            R.drawable.ing_shoe,
+            R.drawable.ing_plant)
 
         text.animate()
             .alpha(0f)
@@ -76,7 +74,7 @@ class MixIngredients : AppCompatActivity() {
 
             val plateSize = 200
             val plate = ImageView(this)
-            plate.setImageResource(R.drawable.plate_icon)
+            plate.setImageResource(R.drawable.plate)
             plate.layoutParams = ConstraintLayout.LayoutParams(plateSize, plateSize)
             plate.x = (centerX + radius * cos(angle) - plateSize / 2).toFloat()
             plate.y = (centerY + radius * sin(angle) - plateSize / 2).toFloat()
@@ -189,7 +187,7 @@ class MixIngredients : AppCompatActivity() {
                         if (count < repetitions) {
                             animateOnce()
                         } else {
-                            animateSteam(pot, R.drawable.steam_icon)
+                            animateSteam(pot, R.drawable.steam)
                         }
                     }
                 })
@@ -270,8 +268,8 @@ class MixIngredients : AppCompatActivity() {
 
         potSet.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: android.animation.Animator) {
-                val rotate = ObjectAnimator.ofFloat(star, "rotation", 0f, 360f).apply {
-                    duration = 3000
+                val rotate = ObjectAnimator.ofFloat(star, "rotation", 0f, 3600f).apply {
+                    duration = 30000
                     repeatCount = ObjectAnimator.INFINITE
                 }
                 val pulseX = ObjectAnimator.ofFloat(star, "scaleX", 1f, 1.1f, 1f).apply {
@@ -286,12 +284,12 @@ class MixIngredients : AppCompatActivity() {
                 }
 
                 val pulseCX = ObjectAnimator.ofFloat(cinta, "scaleX", 1f, 1.1f, 1f).apply {
-                    duration = 1000
+                    duration = 1500
                     repeatCount = ObjectAnimator.INFINITE
                     repeatMode = ObjectAnimator.REVERSE
                 }
                 val pulseCY = ObjectAnimator.ofFloat(cinta, "scaleX", 1f, 1.1f, 1f).apply {
-                    duration = 1000
+                    duration = 1500
                     repeatCount = ObjectAnimator.INFINITE
                     repeatMode = ObjectAnimator.REVERSE
                 }

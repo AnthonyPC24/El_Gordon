@@ -11,16 +11,5 @@ class RecipeSelector : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe_selector)
         hideSystemUI()
-
-        val btnSelect = findViewById<Button>(R.id.tvRecetas)
-
-        btnSelect.setOnClickListener {
-            val intent = Intent(this, MixIngredients::class.java)
-
-            startActivity(intent)
-            @Suppress("DEPRECATION")
-            overridePendingTransition(0, 0)
-            finish()
-        }
     }
 }
