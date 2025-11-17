@@ -1,35 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    package="com.example.el_gordon">
 
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.El_gordon">
+
+        <!-- Pantalla inicial -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
-        </activity>
-        <activity
-            android:name=".LevelSelector"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".RecipeSelector"
-            android:exported="true">
-        </activity>
-        <activity android:name=".AvatarSelector"
-            android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <!-- Selector de avatar -->
+        <activity
+            android:name=".AvatarSelector"
+            android:exported="false" />
+
+        <!-- Selector de nivel -->
+        <activity
+            android:name=".LevelSelector"
+            android:exported="false" />
+
+        <!-- Juego principal -->
+        <activity
+            android:name=".JuegoActivity"
+            android:exported="false" />
+
+        <!-- Selector de receta -->
+        <activity
+            android:name=".RecipeSelector"
+            android:exported="false" />
+
+        <!-- Mezcla de ingredientes -->
+        <activity
+            android:name=".MixIngredients"
+            android:exported="false" />
+
+        <!-- Pantalla de puntajes -->
+        <activity
+            android:name=".ScoreActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
