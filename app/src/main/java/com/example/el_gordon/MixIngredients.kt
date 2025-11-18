@@ -25,6 +25,20 @@ class MixIngredients : AppCompatActivity() {
         setContentView(R.layout.activity_mix_ingredients)
         hideSystemUI()
 
+        val recipeId = intent.getIntExtra("id_recipe", -1)
+        val recipeView = findViewById<ImageView>(R.id.recipe)
+
+        val drawableRes = when (recipeId) {
+            R.id.recipe_butter_bread1 -> R.drawable.recipe_butter_bread1
+            R.id.recipe_rice1 -> R.drawable.recipe_rice1
+            R.id.recipe_pasta1 -> R.drawable.recipe_pasta1
+            R.id.recipe_salad1 -> R.drawable.recipe_salad1
+            R.id.recipe_milkshake1 -> R.drawable.recipe_milkshake1
+            R.id.recipe_omelet1 -> R.drawable.recipe_omelet1
+            else -> R.drawable.not_found
+        }
+        recipeView.setImageResource(drawableRes)
+
         val character = findViewById<View>(R.id.imageView)
         val text = findViewById<View>(R.id.text_icon)
         val pot = findViewById<ImageView>(R.id.pot)
