@@ -13,10 +13,10 @@ class AvatarSelector : AppCompatActivity() {
 
     // Lista de imágenes del carrusel
     private val images = listOf(
-        R.drawable.chef1_icon,
-        R.drawable.chef2_icon,
-        R.drawable.chef3_icon,
-        R.drawable.chef4_icon)
+        R.drawable.chef_1,
+        R.drawable.chef_2,
+        R.drawable.chef_3,
+        R.drawable.chef_4)
 
     private var currentIndex = 0
 

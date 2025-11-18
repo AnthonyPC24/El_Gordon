@@ -12,6 +12,7 @@ class RecipeSelector : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe_selector)
         hideSystemUI()
+<<<<<<< HEAD
 
         val btnSelect = findViewById<Button>(R.id.tvRecetas)
         val level = intent.getIntExtra("LEVEL", 1)
@@ -24,5 +25,7 @@ class RecipeSelector : AppCompatActivity() {
             overridePendingTransition(0, 0)
             finish()
         }
+=======
+>>>>>>> origin/daniil
     }
 }

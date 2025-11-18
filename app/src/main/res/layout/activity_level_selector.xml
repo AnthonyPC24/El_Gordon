@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/kitchen_entry_background"
+    android:background="@drawable/kitchen_entry"
     tools:context=".LevelSelector">
 
     <!-- Imagen del avatar -->
@@ -17,7 +17,7 @@
         android:contentDescription="avatar_level_selector"
         android:scaleType="fitCenter"
         android:scaleX="-1"
-        android:src="@drawable/chef1_icon"
+        android:src="@drawable/chef_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

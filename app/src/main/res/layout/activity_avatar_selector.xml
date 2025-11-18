@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/kitchen_entry_background"
+    android:background="@drawable/kitchen_entry"
     tools:context=".AvatarSelector">
 
     <TextView
@@ -44,7 +44,7 @@
         android:layout_width="350dp"
         android:layout_height="500dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/chef1_icon"
+        android:src="@drawable/chef_1"
         android:contentDescription="imagen_carrusel"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
