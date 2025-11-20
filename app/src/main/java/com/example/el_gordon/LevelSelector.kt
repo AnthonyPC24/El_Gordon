@@ -24,7 +24,12 @@ class LevelSelector : AppCompatActivity() {
                 openRecipeSelector(level)
             }
         }
+        val btnBack = findViewById<Button>(R.id.btnBack)
+        btnBack.setOnClickListener {
+            finish() // vuelve a la pantalla anterior
+        }
     }
+
 
     private fun openRecipeSelector(level: Int) {
         val intent = Intent(this, RecipeSelector::class.java)
@@ -34,4 +39,5 @@ class LevelSelector : AppCompatActivity() {
         overridePendingTransition(0, 0)
         finish()
     }
+
 }
