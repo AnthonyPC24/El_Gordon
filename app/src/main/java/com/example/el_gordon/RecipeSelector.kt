@@ -15,14 +15,21 @@ class RecipeSelector : AppCompatActivity() {
         setContentView(R.layout.activity_recipe_selector)
         hideSystemUI()
 
-        val selectedRecipe = listOf<ImageView>(
-            findViewById(R.id.recipe_butter_bread1),
-            findViewById(R.id.recipe_milkshake1),
-            findViewById(R.id.recipe_pasta1),
-            findViewById(R.id.recipe_rice1),
-            findViewById(R.id.recipe_salad1),
-            findViewById(R.id.recipe_omelet1)
-                                              )
+        val difficulty = intent.getIntExtra("level", 0)
+
+        val recipeNames = listOf(
+            "recipe_butter_bread",
+            "recipe_milkshake",
+            "recipe_pasta",
+            "recipe_rice",
+            "recipe_salad",
+            "recipe_omelette",
+        )
+
+        val selectedRecipe = recipeNames.map { name ->
+            val id = resources.getIdentifier("${name}${difficulty}", "id", packageName)
+            findViewById<ImageView>(id)
+        }
 
         selectedRecipe.forEach { imageView ->
             imageView.setOnTouchListener { v, event ->

@@ -12,15 +12,31 @@ class LevelSelector : AppCompatActivity() {
         setContentView(R.layout.activity_level_selector)
         hideSystemUI()
 
-        val btnSelect = findViewById<Button>(R.id.btnNivel1)
+        val levels = listOf(
+            findViewById<Button>(R.id.btnNivel1) to 1,
+            findViewById<Button>(R.id.btnNivel2) to 2,
+            findViewById<Button>(R.id.btnNivel3) to 3
+        )
 
-        btnSelect.setOnClickListener {
-            val intent = Intent(this, RecipeSelector::class.java)
+        levels.forEach { (button, level) ->
+            button.setOnClickListener {
+                openRecipeSelector(level)
+            }
+        }
 
-            startActivity(intent)
-            @Suppress("DEPRECATION")
-            overridePendingTransition(0, 0)
+        val btnBack = findViewById<Button>(R.id.btnBack)
+        btnBack.setOnClickListener {
             finish()
         }
     }
+
+    private fun openRecipeSelector(level: Int) {
+        val intent = Intent(this, RecipeSelector::class.java)
+        intent.putExtra("level", level)
+        startActivity(intent)
+        @Suppress("DEPRECATION")
+        overridePendingTransition(0, 0)
+        finish()
+    }
+
 }

@@ -34,8 +34,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:elevation="6dp">
 
         <!-- Texto principal -->
@@ -89,6 +89,19 @@
                 android:textSize="18sp"
                 app:backgroundTint="@color/dark_blue"
                 android:background="@drawable/btn_select_level" />
+
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="&lt;"
+                android:textSize="24sp"
+                android:background="@drawable/btn_select_avatar"
+                android:layout_marginBottom="24dp"
+                android:layout_marginStart="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
         </LinearLayout>
     </LinearLayout>
 
