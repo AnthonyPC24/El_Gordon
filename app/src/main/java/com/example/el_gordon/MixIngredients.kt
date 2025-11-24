@@ -25,23 +25,29 @@ class MixIngredients : AppCompatActivity() {
         setContentView(R.layout.activity_mix_ingredients)
         hideSystemUI()
 
-        val recipeId = intent.getIntExtra("recipe", 0)
+        val recipeIndex = intent.getIntExtra("recipeIndex", 0)
+        val difficulty = intent.getIntExtra("difficulty", 1)
+
         val recipeView = findViewById<ImageView>(R.id.recipe)
+        val selectedRecipe = RecipeData.getRecipes(this).getOrNull(recipeIndex)
 
-        val recipeName = resources.getResourceEntryName(recipeId)
-        val difficulty = recipeName.last().digitToInt()
-        val baseName = recipeName.dropLast(1)
-        val drawableRes = resources.getIdentifier("$baseName$difficulty", "drawable", packageName)
-
-        recipeView.setImageResource(drawableRes)
+        val allRecipeIngredients = selectedRecipe?.ingredients?.map { it.imageRes } ?: emptyList()
+        val recipeDrawableRes = resources.getIdentifier(selectedRecipe?.name + difficulty, "drawable", packageName)
+        recipeView.setImageResource(recipeDrawableRes)
 
         val character = findViewById<View>(R.id.imageView)
         val text = findViewById<View>(R.id.text_icon)
         val pot = findViewById<ImageView>(R.id.pot)
         val layout = findViewById<ConstraintLayout>(R.id.constraintLayout)
 
-        val selectedRecipe = RecipeData.getRecipes(this).find { it.id == recipeId}
-        val ingredients = selectedRecipe?.ingredients?.map { it.imageRes } ?: emptyList()
+        val badIngredients = listOf(
+            R.drawable.ing_plant,
+            R.drawable.ing_shoe,
+            R.drawable.ing_rotten_egg,
+            R.drawable.ing_sock,
+            R.drawable.ing_rock,
+            R.drawable.ing_excrement
+        )
 
         text.animate()
             .alpha(0f)
@@ -54,17 +60,33 @@ class MixIngredients : AppCompatActivity() {
 
                 val animSet = AnimatorSet()
                 animSet.playSequentially(girarIzq, moverIzq, girarFrente)
-
                 animSet.addListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: android.animation.Animator) {
                         super.onAnimationEnd(animation)
 
                         pot.visibility = View.VISIBLE
-                        placeIngredientsAroundPot(layout, pot, ingredients)
 
+                        val numCorrect = when (difficulty) {
+                            1 -> 2
+                            2 -> 4
+                            3 -> 6
+                            else -> allRecipeIngredients.size
+                        }
+                        val correctIngredients = allRecipeIngredients.take(numCorrect)
+
+                        val numBad = when (difficulty) {
+                            1 -> 1
+                            2 -> 2
+                            3 -> 3
+                            else -> 0
+                        }
+                        val badIngredientsSelected = badIngredients.shuffled().take(numBad)
+
+                        val ingredientsToPlay = (correctIngredients + badIngredientsSelected).shuffled()
+
+                        placeIngredientsAroundPot(layout, pot, ingredientsToPlay)
                     }
                 })
-
                 animSet.start()
             }
     }

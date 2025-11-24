@@ -45,7 +45,6 @@ object RecipeData {
             Ingredient(3, R.drawable.ing_carrot),
             Ingredient(4, R.drawable.ing_peas),
             Ingredient(5, R.drawable.ing_chicken),
-            Ingredient(4, R.drawable.ing_peas),
             Ingredient(6, R.drawable.ing_spices)
         )),
         Triple("recipe_omelette", 1, listOf(
