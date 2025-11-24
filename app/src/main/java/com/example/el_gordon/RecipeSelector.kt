@@ -44,7 +44,7 @@ class RecipeSelector : AppCompatActivity() {
 
                         if (event.action == MotionEvent.ACTION_UP) {
                             val intent = Intent(this, MixIngredients::class.java)
-                            intent.putExtra("id_recipe", imageView.id)
+                            intent.putExtra("recipe", imageView.id)
                             startActivity(intent)
                             @Suppress("DEPRECATION")
                             overridePendingTransition(0, 0)

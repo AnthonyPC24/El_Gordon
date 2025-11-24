@@ -11,12 +11,12 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.el_gordon.data.RecipeData
 import com.tuapp.utils.hideSystemUI
 import kotlin.math.cos
 import kotlin.math.sin
 
 class MixIngredients : AppCompatActivity() {
-
     private val plates = mutableListOf<ImageView>()
     private val ingredientsInPlay = mutableListOf<ImageView>()
 
@@ -25,18 +25,14 @@ class MixIngredients : AppCompatActivity() {
         setContentView(R.layout.activity_mix_ingredients)
         hideSystemUI()
 
-        val recipeId = intent.getIntExtra("id_recipe", -1)
+        val recipeId = intent.getIntExtra("recipe", 0)
         val recipeView = findViewById<ImageView>(R.id.recipe)
 
-        val drawableRes = when (recipeId) {
-            R.id.recipe_butter_bread1 -> R.drawable.recipe_butter_bread1
-            R.id.recipe_rice1 -> R.drawable.recipe_rice1
-            R.id.recipe_pasta1 -> R.drawable.recipe_pasta1
-            R.id.recipe_salad1 -> R.drawable.recipe_salad1
-            R.id.recipe_milkshake1 -> R.drawable.recipe_milkshake1
-            R.id.recipe_omelet1 -> R.drawable.recipe_omelet1
-            else -> R.drawable.not_found
-        }
+        val recipeName = resources.getResourceEntryName(recipeId)
+        val difficulty = recipeName.last().digitToInt()
+        val baseName = recipeName.dropLast(1)
+        val drawableRes = resources.getIdentifier("$baseName$difficulty", "drawable", packageName)
+
         recipeView.setImageResource(drawableRes)
 
         val character = findViewById<View>(R.id.imageView)
@@ -44,12 +40,8 @@ class MixIngredients : AppCompatActivity() {
         val pot = findViewById<ImageView>(R.id.pot)
         val layout = findViewById<ConstraintLayout>(R.id.constraintLayout)
 
-        val ingredients = listOf(
-            R.drawable.ing_cheese,
-            R.drawable.ing_bread,
-            R.drawable.ing_milk,
-            R.drawable.ing_shoe,
-            R.drawable.ing_plant)
+        val selectedRecipe = RecipeData.getRecipes(this).find { it.id == recipeId}
+        val ingredients = selectedRecipe?.ingredients?.map { it.imageRes } ?: emptyList()
 
         text.animate()
             .alpha(0f)
