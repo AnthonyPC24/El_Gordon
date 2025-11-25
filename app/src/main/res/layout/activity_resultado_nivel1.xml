@@ -1,19 +1,23 @@
 <LinearLayout
+    android:id="@+id/rootLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp">
+    android:padding="24dp"
+    android:background="@drawable/kitchen_entry">
+    >
 
     <TextView
         android:id="@+id/tvScoreTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="¡Score Final!"
+        android:text="¡Puntuacion Final!"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:textColor="#FFEB3B"/>
 
     <LinearLayout
         android:id="@+id/starsContainer"
@@ -27,22 +31,25 @@
             android:id="@+id/star1"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:src="@drawable/estrella_vacia"
-            android:layout_margin="4dp"/>
+            android:src="@drawable/star"
+            android:layout_margin="4dp"
+            android:visibility="gone"/>/>
 
         <ImageView
             android:id="@+id/star2"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:src="@drawable/estrella_vacia"
-            android:layout_margin="4dp"/>
+            android:src="@drawable/star"
+            android:layout_margin="4dp"
+            android:visibility="gone"/>/>
 
         <ImageView
             android:id="@+id/star3"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:src="@drawable/estrella_vacia"
-            android:layout_margin="4dp"/>
+            android:src="@drawable/star"
+            android:layout_margin="4dp"
+            android:visibility="gone"/>/>
     </LinearLayout>
 
     <Button

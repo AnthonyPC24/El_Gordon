@@ -7,7 +7,8 @@
     android:background="@drawable/storage"
     tools:context=".RecipeSelector">
 
-    <TextView
+    <!-- 🔹 Botón "Recetas" -->
+    <Button
         android:id="@+id/tvRecetas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,10 +16,12 @@
         android:textSize="50sp"
         android:fontFamily="@font/poetsenone_regular"
         android:textColor="@android:color/white"
+        android:background="@drawable/btn_select_level"
+        android:padding="16dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="60dp"/>
+        android:layout_marginTop="60dp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/contenedorInterno"
@@ -105,8 +108,9 @@
                 android:layout_margin="8dp"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
-                android:src="@drawable/recipe_omlete1" />
+                android:src="@drawable/recipe_omelet1" />
         </GridLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
@@ -25,6 +26,16 @@ class MixIngredients : AppCompatActivity() {
         setContentView(R.layout.activity_mix_ingredients)
         hideSystemUI()
 
+        val btnNext = findViewById<Button>(R.id.btn_next)
+        btnNext.visibility = View.INVISIBLE // empieza oculto
+
+        // Listener del botón Next
+        btnNext.setOnClickListener {
+            val intent = Intent(this, ScoreActivity::class.java) // Cambia NextActivity por tu siguiente pantalla
+            startActivity(intent)
+            finish()
+        }
+
         val character = findViewById<View>(R.id.imageView)
         val text = findViewById<View>(R.id.text_icon)
         val pot = findViewById<ImageView>(R.id.pot)
@@ -32,10 +43,13 @@ class MixIngredients : AppCompatActivity() {
 
         val ingredients = listOf(
             R.drawable.ing_cheese,
-            R.drawable.ing_bread,
-            R.drawable.ing_milk,
             R.drawable.ing_shoe,
-            R.drawable.ing_plant)
+            R.drawable.ing_cheese,
+            R.drawable.ing_shoe,
+            R.drawable.ing_cheese,
+            R.drawable.ing_shoe,
+            R.drawable.ing_cheese
+                                )
 
         text.animate()
             .alpha(0f)
@@ -55,7 +69,6 @@ class MixIngredients : AppCompatActivity() {
 
                         pot.visibility = View.VISIBLE
                         placeIngredientsAroundPot(layout, pot, ingredients)
-
                     }
                 })
 
@@ -153,11 +166,7 @@ class MixIngredients : AppCompatActivity() {
         }
     }
 
-    private fun startCaptureAnimation(
-        layout: ConstraintLayout,
-        pot: ImageView,
-        plates: List<ImageView>,
-        repetitions: Int = 3) {
+    private fun startCaptureAnimation(layout: ConstraintLayout, pot: ImageView, plates: List<ImageView>, repetitions: Int = 3) {
         var count = 0
 
         fun animateOnce() {
@@ -223,10 +232,9 @@ class MixIngredients : AppCompatActivity() {
         animSet.start()
     }
 
-
     private fun animateStarWithPotExplosion(pot: ImageView, star: ImageView) {
         val cinta = findViewById<ImageView>(R.id.cinta)
-        val btnNext = findViewById<Button>(R.id.btn_next)
+        val btnNext = findViewById<Button>(R.id.btn_next) // Ya tiene listener asignado en onCreate
 
         val slowBackX = ObjectAnimator.ofFloat(pot, "scaleX", 1f, 0.9f).apply { duration = 600 }
         val slowBackY = ObjectAnimator.ofFloat(pot, "scaleY", 1f, 0.9f).apply { duration = 600 }
@@ -249,7 +257,8 @@ class MixIngredients : AppCompatActivity() {
                 starGrowX,
                 starGrowY,
                 settleRecipeX,
-                settleRecipeY)
+                settleRecipeY
+                        )
 
             addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationStart(animation: android.animation.Animator) {
@@ -264,12 +273,13 @@ class MixIngredients : AppCompatActivity() {
         val potSet = AnimatorSet()
         potSet.playSequentially(
             AnimatorSet().apply { playTogether(slowBackX, slowBackY) },
-            explosionSet)
+            explosionSet
+                               )
 
         potSet.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: android.animation.Animator) {
-                val rotate = ObjectAnimator.ofFloat(star, "rotation", 0f, 3600f).apply {
-                    duration = 30000
+                val rotate = ObjectAnimator.ofFloat(star, "rotation", 0f, 360f).apply {
+                    duration = 3000
                     repeatCount = ObjectAnimator.INFINITE
                 }
                 val pulseX = ObjectAnimator.ofFloat(star, "scaleX", 1f, 1.1f, 1f).apply {
@@ -284,20 +294,22 @@ class MixIngredients : AppCompatActivity() {
                 }
 
                 val pulseCX = ObjectAnimator.ofFloat(cinta, "scaleX", 1f, 1.1f, 1f).apply {
-                    duration = 1500
+                    duration = 1000
                     repeatCount = ObjectAnimator.INFINITE
                     repeatMode = ObjectAnimator.REVERSE
                 }
-                val pulseCY = ObjectAnimator.ofFloat(cinta, "scaleX", 1f, 1.1f, 1f).apply {
-                    duration = 1500
+                val pulseCY = ObjectAnimator.ofFloat(cinta, "scaleY", 1f, 1.1f, 1f).apply {
+                    duration = 1000
                     repeatCount = ObjectAnimator.INFINITE
                     repeatMode = ObjectAnimator.REVERSE
                 }
+
                 AnimatorSet().apply { playTogether(rotate, pulseX, pulseY, pulseCX, pulseCY) }.start()
             }
         })
         potSet.start()
 
+        // Mostrar el botón Next al final de la animación
         btnNext.visibility = View.VISIBLE
     }
 }

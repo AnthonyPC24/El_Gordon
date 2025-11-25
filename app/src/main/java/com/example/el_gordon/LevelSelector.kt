@@ -24,12 +24,15 @@ class LevelSelector : AppCompatActivity() {
                 openRecipeSelector(level)
             }
         }
+
+        // Botón para volver al AvatarSelector
         val btnBack = findViewById<Button>(R.id.btnBack)
         btnBack.setOnClickListener {
-            finish() // vuelve a la pantalla anterior
+            val intent = Intent(this, AvatarSelector::class.java)
+            startActivity(intent)
+            finish()
         }
     }
-
 
     private fun openRecipeSelector(level: Int) {
         val intent = Intent(this, RecipeSelector::class.java)
