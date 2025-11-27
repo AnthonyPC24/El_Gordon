@@ -58,5 +58,15 @@ class AvatarSelector : AppCompatActivity() {
             overridePendingTransition(0, 0)
             finish()
         }
+        val btnBack = findViewById<Button>(R.id.btnBack)
+        btnBack.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+
     }
-}
+
+    }
+
