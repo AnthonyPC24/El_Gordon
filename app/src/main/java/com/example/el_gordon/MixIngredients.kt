@@ -184,7 +184,7 @@ class MixIngredients : AppCompatActivity() {
         pot: ImageView,
         plates: List<ImageView>,
         repetitions: Int = 3
-    ) {
+                                     ) {
         var count = 0
 
         fun animateOnce() {
@@ -253,37 +253,40 @@ class MixIngredients : AppCompatActivity() {
     private fun animateStarWithPotExplosion(pot: ImageView, star: ImageView) {
         val cinta = findViewById<ImageView>(R.id.cinta)
         val btnNext = findViewById<Button>(R.id.btn_next)
-
-        val slowBackX = ObjectAnimator.ofFloat(pot, "scaleX", 1f, 0.9f).apply { duration = 600 }
-        val slowBackY = ObjectAnimator.ofFloat(pot, "scaleY", 1f, 0.9f).apply { duration = 600 }
-
         val recipe = findViewById<ImageView>(R.id.recipe)
+
+        recipe.visibility = View.VISIBLE
+        star.visibility = View.VISIBLE
 
         recipe.scaleX = 0f
         recipe.scaleY = 0f
         star.scaleX = 0f
         star.scaleY = 0f
 
-        val starGrowX = ObjectAnimator.ofFloat(star, "scaleX", 1.5f).apply { duration = 250 }
-        val starGrowY = ObjectAnimator.ofFloat(star, "scaleY", 1.5f).apply { duration = 250 }
+        val slowBackX = ObjectAnimator.ofFloat(pot, "scaleX", 1f, 0.9f).apply { duration = 600 }
+        val slowBackY = ObjectAnimator.ofFloat(pot, "scaleY", 1f, 0.9f).apply { duration = 600 }
 
-        val settleRecipeX = ObjectAnimator.ofFloat(recipe, "scaleX", 2f).apply { duration = 250 }
-        val settleRecipeY = ObjectAnimator.ofFloat(recipe, "scaleY", 2f).apply { duration = 250 }
+        val starGrowX = ObjectAnimator.ofFloat(star, "scaleX", 0f, 1.5f).apply { duration = 250 }
+        val starGrowY = ObjectAnimator.ofFloat(star, "scaleY", 0f, 1.5f).apply { duration = 250 }
+
+        val settleRecipeX = ObjectAnimator.ofFloat(recipe, "scaleX", 0f, 2f).apply { duration = 250 }
+        val settleRecipeY = ObjectAnimator.ofFloat(recipe, "scaleY", 0f, 2f).apply { duration = 250 }
 
         val explosionSet = AnimatorSet().apply {
             playTogether(starGrowX, starGrowY, settleRecipeX, settleRecipeY)
             addListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationStart(animation: android.animation.Animator) {
+                override fun onAnimationStart(animation : android.animation.Animator) {
                     pot.visibility = View.INVISIBLE
-                    recipe.visibility = View.VISIBLE
-                    star.visibility = View.VISIBLE
                     cinta.visibility = View.VISIBLE
                 }
             })
         }
 
         val potSet = AnimatorSet()
-        potSet.playSequentially(AnimatorSet().apply { playTogether(slowBackX, slowBackY) }, explosionSet)
+        potSet.playSequentially(
+            AnimatorSet().apply { playTogether(slowBackX, slowBackY) },
+            explosionSet
+        )
 
         potSet.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: android.animation.Animator) {
@@ -312,7 +315,6 @@ class MixIngredients : AppCompatActivity() {
                     repeatCount = ObjectAnimator.INFINITE
                     repeatMode = ObjectAnimator.REVERSE
                 }
-
                 AnimatorSet().apply { playTogether(rotate, pulseX, pulseY, pulseCX, pulseCY) }.start()
             }
         })
