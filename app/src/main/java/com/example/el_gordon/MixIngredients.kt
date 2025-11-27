@@ -4,6 +4,7 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
@@ -19,6 +20,9 @@ import kotlin.math.sin
 class MixIngredients : AppCompatActivity() {
     private val plates = mutableListOf<ImageView>()
     private val ingredientsInPlay = mutableListOf<ImageView>()
+    private var wrongIngredientsCount = 0
+    private lateinit var badIngredients: List<Int>
+    private var difficulty = 1 // Declarar difficulty como variable de clase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +30,7 @@ class MixIngredients : AppCompatActivity() {
         hideSystemUI()
 
         val recipeIndex = intent.getIntExtra("recipeIndex", 0)
-        val difficulty = intent.getIntExtra("difficulty", 1)
+        difficulty = intent.getIntExtra("difficulty", 1) // Asignar a la variable de clase
 
         val recipeView = findViewById<ImageView>(R.id.recipe)
         val selectedRecipe = RecipeData.getRecipes(this).getOrNull(recipeIndex)
@@ -39,14 +43,14 @@ class MixIngredients : AppCompatActivity() {
         val pot = findViewById<ImageView>(R.id.pot)
         val layout = findViewById<ConstraintLayout>(R.id.constraintLayout)
 
-        val badIngredients = listOf(
+        badIngredients = listOf(
             R.drawable.ing_plant,
             R.drawable.ing_shoe,
             R.drawable.ing_rotten_egg,
             R.drawable.ing_sock,
             R.drawable.ing_rock,
             R.drawable.ing_excrement
-        )
+                               )
 
         text.animate()
             .alpha(0f)
@@ -109,10 +113,12 @@ class MixIngredients : AppCompatActivity() {
 
             val ingredientSize = 150
             val ingredient = ImageView(this)
-            ingredient.setImageResource(ingredientIds[i])
+            val ingredientResId = ingredientIds[i] // Guardar el resource ID
+            ingredient.setImageResource(ingredientResId)
             ingredient.layoutParams = ConstraintLayout.LayoutParams(ingredientSize, ingredientSize)
             ingredient.x = plate.x + (plateSize - ingredientSize) / 2
             ingredient.y = plate.y + (plateSize - ingredientSize) / 2
+            ingredient.tag = ingredientResId // Guardar el resource ID como tag
             layout.addView(ingredient)
             ingredientsInPlay.add(ingredient)
 
@@ -141,6 +147,12 @@ class MixIngredients : AppCompatActivity() {
                             val potBottom = pot.y + pot.height
 
                             if (ingredientCenterX in potLeft..potRight && ingredientCenterY in potTop..potBottom) {
+                                // Verificar si el ingrediente es erróneo
+                                val ingredientResId = v.tag as Int
+                                if (badIngredients.contains(ingredientResId)) {
+                                    wrongIngredientsCount++ // Incrementar contador si es erróneo
+                                }
+
                                 layout.removeView(v)
                                 ingredientsInPlay.remove(v)
 
@@ -286,7 +298,7 @@ class MixIngredients : AppCompatActivity() {
         potSet.playSequentially(
             AnimatorSet().apply { playTogether(slowBackX, slowBackY) },
             explosionSet
-        )
+                               )
 
         potSet.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: android.animation.Animator) {
@@ -321,5 +333,13 @@ class MixIngredients : AppCompatActivity() {
         potSet.start()
 
         btnNext.visibility = View.VISIBLE
+
+        btnNext.setOnClickListener {
+            val intent = Intent(this, ScoreActivity::class.java)
+            intent.putExtra("wrongIngredientsCount", wrongIngredientsCount)
+            intent.putExtra("difficulty", difficulty)
+            startActivity(intent)
+            finish()
+        }
     }
 }
