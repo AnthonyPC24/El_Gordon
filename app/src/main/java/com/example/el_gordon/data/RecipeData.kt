@@ -58,15 +58,15 @@ object RecipeData {
     )
 
     fun getRecipes(context: Context): List<Recipe> {
-        return recipeBase.map { (baseName, difficulty, ingredients) ->
+        return recipeBase.mapIndexed { index, (baseName, difficulty, ingredients) ->
             Recipe(
-                id = getResByName("${baseName}${difficulty}", "id", context),
-                imageRes = getResByName("${baseName}${difficulty}", "drawable", context),
+                id = index,
+                imageRes = context.resources.getIdentifier(baseName, "drawable", context.packageName),
                 difficulty = difficulty,
-                ingredients = ingredients
-            )
+                ingredients = ingredients)
         }
     }
+
 
     private fun getResByName(resName: String, resType: String, context: Context): Int {
         return context.resources.getIdentifier(resName, resType, context.packageName)

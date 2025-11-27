@@ -32,8 +32,7 @@ class MixIngredients : AppCompatActivity() {
         val selectedRecipe = RecipeData.getRecipes(this).getOrNull(recipeIndex)
 
         val allRecipeIngredients = selectedRecipe?.ingredients?.map { it.imageRes } ?: emptyList()
-        val recipeDrawableRes = resources.getIdentifier(selectedRecipe?.name + difficulty, "drawable", packageName)
-        recipeView.setImageResource(recipeDrawableRes)
+        recipeView.setImageResource(selectedRecipe?.imageRes ?: 0)
 
         val character = findViewById<View>(R.id.imageView)
         val text = findViewById<View>(R.id.text_icon)
@@ -63,7 +62,6 @@ class MixIngredients : AppCompatActivity() {
                 animSet.addListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: android.animation.Animator) {
                         super.onAnimationEnd(animation)
-
                         pot.visibility = View.VISIBLE
 
                         val numCorrect = when (difficulty) {
@@ -185,7 +183,8 @@ class MixIngredients : AppCompatActivity() {
         layout: ConstraintLayout,
         pot: ImageView,
         plates: List<ImageView>,
-        repetitions: Int = 3) {
+        repetitions: Int = 3
+    ) {
         var count = 0
 
         fun animateOnce() {
@@ -251,7 +250,6 @@ class MixIngredients : AppCompatActivity() {
         animSet.start()
     }
 
-
     private fun animateStarWithPotExplosion(pot: ImageView, star: ImageView) {
         val cinta = findViewById<ImageView>(R.id.cinta)
         val btnNext = findViewById<Button>(R.id.btn_next)
@@ -273,12 +271,7 @@ class MixIngredients : AppCompatActivity() {
         val settleRecipeY = ObjectAnimator.ofFloat(recipe, "scaleY", 2f).apply { duration = 250 }
 
         val explosionSet = AnimatorSet().apply {
-            playTogether(
-                starGrowX,
-                starGrowY,
-                settleRecipeX,
-                settleRecipeY)
-
+            playTogether(starGrowX, starGrowY, settleRecipeX, settleRecipeY)
             addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationStart(animation: android.animation.Animator) {
                     pot.visibility = View.INVISIBLE
@@ -290,9 +283,7 @@ class MixIngredients : AppCompatActivity() {
         }
 
         val potSet = AnimatorSet()
-        potSet.playSequentially(
-            AnimatorSet().apply { playTogether(slowBackX, slowBackY) },
-            explosionSet)
+        potSet.playSequentially(AnimatorSet().apply { playTogether(slowBackX, slowBackY) }, explosionSet)
 
         potSet.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: android.animation.Animator) {
@@ -321,6 +312,7 @@ class MixIngredients : AppCompatActivity() {
                     repeatCount = ObjectAnimator.INFINITE
                     repeatMode = ObjectAnimator.REVERSE
                 }
+
                 AnimatorSet().apply { playTogether(rotate, pulseX, pulseY, pulseCX, pulseCY) }.start()
             }
         })

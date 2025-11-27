@@ -11,7 +11,6 @@ import com.tuapp.utils.hideSystemUI
 
 class AvatarSelector : AppCompatActivity() {
 
-    // Lista de imágenes del carrusel
     private val images = listOf(
         R.drawable.chef_1,
         R.drawable.chef_2,

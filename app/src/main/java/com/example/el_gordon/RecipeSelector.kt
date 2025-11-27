@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.tuapp.utils.hideSystemUI
 
 class RecipeSelector : AppCompatActivity() {
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,9 +23,9 @@ class RecipeSelector : AppCompatActivity() {
         val recipeNames = listOf(
             "recipe_butter_bread",
             "recipe_milkshake",
+            "recipe_salad",
             "recipe_pasta",
             "recipe_rice",
-            "recipe_salad",
             "recipe_omelette"
         )
 
@@ -54,13 +55,18 @@ class RecipeSelector : AppCompatActivity() {
                         v.scaleX = 0.9f
                         v.scaleY = 0.9f
                     }
+
                     MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                         v.scaleX = 1f
                         v.scaleY = 1f
+
                         if (event.action == MotionEvent.ACTION_UP) {
+
                             val intent = Intent(this, MixIngredients::class.java)
+
                             intent.putExtra("recipeIndex", index)
                             intent.putExtra("difficulty", difficulty)
+
                             startActivity(intent)
                             overridePendingTransition(0, 0)
                             finish()
