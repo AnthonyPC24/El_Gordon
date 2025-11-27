@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.tuapp.utils.hideSystemUI
 
 class LevelSelector : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_level_selector)
@@ -17,7 +16,7 @@ class LevelSelector : AppCompatActivity() {
             findViewById<Button>(R.id.btnNivel1) to 1,
             findViewById<Button>(R.id.btnNivel2) to 2,
             findViewById<Button>(R.id.btnNivel3) to 3
-                           )
+        )
 
         levels.forEach { (button, level) ->
             button.setOnClickListener {
@@ -25,18 +24,15 @@ class LevelSelector : AppCompatActivity() {
             }
         }
 
-        // Botón para volver al AvatarSelector
         val btnBack = findViewById<Button>(R.id.btnBack)
         btnBack.setOnClickListener {
-            val intent = Intent(this, AvatarSelector::class.java)
-            startActivity(intent)
             finish()
         }
     }
 
     private fun openRecipeSelector(level: Int) {
         val intent = Intent(this, RecipeSelector::class.java)
-        intent.putExtra("LEVEL", level) // Pasamos el nivel
+        intent.putExtra("level", level)
         startActivity(intent)
         @Suppress("DEPRECATION")
         overridePendingTransition(0, 0)
