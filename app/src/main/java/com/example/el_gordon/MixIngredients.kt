@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
@@ -22,7 +23,8 @@ class MixIngredients : AppCompatActivity() {
     private val ingredientsInPlay = mutableListOf<ImageView>()
     private var wrongIngredientsCount = 0
     private lateinit var badIngredients: List<Int>
-    private var difficulty = 1 // Declarar difficulty como variable de clase
+    private var difficulty = 1
+    private val correctIngredientsInPlay = mutableListOf<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,13 +32,15 @@ class MixIngredients : AppCompatActivity() {
         hideSystemUI()
 
         val recipeIndex = intent.getIntExtra("recipeIndex", 0)
-        difficulty = intent.getIntExtra("difficulty", 1) // Asignar a la variable de clase
+        difficulty = intent.getIntExtra("difficulty", 1)
+        val recipeSrc = intent.getIntExtra("drawableRes", 0)
 
         val recipeView = findViewById<ImageView>(R.id.recipe)
-        val selectedRecipe = RecipeData.getRecipes(this).getOrNull(recipeIndex)
+        recipeView.setImageResource(recipeSrc)
+        recipeView.tag = recipeSrc
 
+        val selectedRecipe = RecipeData.getRecipes(this).getOrNull(recipeIndex)
         val allRecipeIngredients = selectedRecipe?.ingredients?.map { it.imageRes } ?: emptyList()
-        recipeView.setImageResource(selectedRecipe?.imageRes ?: 0)
 
         val character = findViewById<View>(R.id.imageView)
         val text = findViewById<View>(R.id.text_icon)
@@ -75,6 +79,8 @@ class MixIngredients : AppCompatActivity() {
                             else -> allRecipeIngredients.size
                         }
                         val correctIngredients = allRecipeIngredients.take(numCorrect)
+                        correctIngredientsInPlay.clear()
+                        correctIngredientsInPlay.addAll(correctIngredients)
 
                         val numBad = when (difficulty) {
                             1 -> 1
@@ -85,7 +91,6 @@ class MixIngredients : AppCompatActivity() {
                         val badIngredientsSelected = badIngredients.shuffled().take(numBad)
 
                         val ingredientsToPlay = (correctIngredients + badIngredientsSelected).shuffled()
-
                         placeIngredientsAroundPot(layout, pot, ingredientsToPlay)
                     }
                 })
@@ -113,12 +118,12 @@ class MixIngredients : AppCompatActivity() {
 
             val ingredientSize = 150
             val ingredient = ImageView(this)
-            val ingredientResId = ingredientIds[i] // Guardar el resource ID
+            val ingredientResId = ingredientIds[i]
             ingredient.setImageResource(ingredientResId)
             ingredient.layoutParams = ConstraintLayout.LayoutParams(ingredientSize, ingredientSize)
             ingredient.x = plate.x + (plateSize - ingredientSize) / 2
             ingredient.y = plate.y + (plateSize - ingredientSize) / 2
-            ingredient.tag = ingredientResId // Guardar el resource ID como tag
+            ingredient.tag = ingredientResId
             layout.addView(ingredient)
             ingredientsInPlay.add(ingredient)
 
@@ -147,20 +152,26 @@ class MixIngredients : AppCompatActivity() {
                             val potBottom = pot.y + pot.height
 
                             if (ingredientCenterX in potLeft..potRight && ingredientCenterY in potTop..potBottom) {
-                                // Verificar si el ingrediente es erróneo
                                 val ingredientResId = v.tag as Int
                                 if (badIngredients.contains(ingredientResId)) {
-                                    wrongIngredientsCount++ // Incrementar contador si es erróneo
+                                    wrongIngredientsCount++
+                                    Log.d("WRONG_INGREDIENTS_COUNT_DEBUG", "$wrongIngredientsCount")
+                                } else {
+                                    correctIngredientsInPlay.remove(ingredientResId)
                                 }
 
                                 layout.removeView(v)
                                 ingredientsInPlay.remove(v)
-
                                 animatePotOnce(pot)
 
-                                if (ingredientsInPlay.isEmpty()) {
+                                // Si todos los ingredientes correctos se agregaron, se eliminan también los malos
+                                if (correctIngredientsInPlay.isEmpty()) {
+                                    Log.d("MIX_INGREDIENTS_DEBUG", "Todos los ingredientes correctos agregados")
+                                    ingredientsInPlay.forEach { layout.removeView(it) }
+                                    ingredientsInPlay.clear()
                                     startCaptureAnimation(layout, pot, plates)
                                 }
+
                             } else {
                                 v.animate()
                                     .x(plate.x + (plateSize - ingredientSize) / 2)
@@ -268,6 +279,20 @@ class MixIngredients : AppCompatActivity() {
         val recipe = findViewById<ImageView>(R.id.recipe)
 
         recipe.visibility = View.VISIBLE
+
+        val clampedErrors = wrongIngredientsCount.coerceIn(1, 3)
+
+        val wrongDrawableName = "recipe_wrong$clampedErrors"
+        val wrongDrawableId = resources.getIdentifier(wrongDrawableName, "drawable", packageName)
+
+        if (wrongDrawableId != 0) {
+            recipe.setImageResource(wrongDrawableId)
+            Log.d("RECIPE_FINAL_IMAGE", "Mostrando imagen: $wrongDrawableName")
+        } else {
+            Log.e("RECIPE_FINAL_IMAGE", "No existe la imagen para $wrongDrawableName")
+        }
+
+
         star.visibility = View.VISIBLE
 
         recipe.scaleX = 0f
@@ -287,7 +312,7 @@ class MixIngredients : AppCompatActivity() {
         val explosionSet = AnimatorSet().apply {
             playTogether(starGrowX, starGrowY, settleRecipeX, settleRecipeY)
             addListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationStart(animation : android.animation.Animator) {
+                override fun onAnimationStart(animation: android.animation.Animator) {
                     pot.visibility = View.INVISIBLE
                     cinta.visibility = View.VISIBLE
                 }
@@ -333,7 +358,6 @@ class MixIngredients : AppCompatActivity() {
         potSet.start()
 
         btnNext.visibility = View.VISIBLE
-
         btnNext.setOnClickListener {
             val intent = Intent(this, ScoreActivity::class.java)
             intent.putExtra("wrongIngredientsCount", wrongIngredientsCount)

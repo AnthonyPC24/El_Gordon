@@ -66,6 +66,7 @@ class RecipeSelector : AppCompatActivity() {
 
                             intent.putExtra("recipeIndex", index)
                             intent.putExtra("difficulty", difficulty)
+                            intent.putExtra("drawableRes", drawableRes)
 
                             startActivity(intent)
                             overridePendingTransition(0, 0)

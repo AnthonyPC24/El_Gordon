@@ -22,20 +22,16 @@ class ScoreActivity : AppCompatActivity() {
         val rootLayout = findViewById<LinearLayout>(R.id.rootLayout)
         rootLayout.setBackgroundResource(R.drawable.kitchen_entry)
 
-        val tvScoreTitle = findViewById<TextView>(R.id.tvScoreTitle)
         val btnBack = findViewById<Button>(R.id.btnBackToLevels)
 
         val stars = listOf(
             findViewById<ImageView>(R.id.star1),
             findViewById<ImageView>(R.id.star2),
             findViewById<ImageView>(R.id.star3)
-                          )
+        )
 
-        // Calcular estrellas ganadas según dificultad y errores
         val maxStars = difficulty
         val earnedStars = maxStars - wrongIngredientsCount
-
-        tvScoreTitle.text = "Nivel $difficulty - Score Final"
 
         for (i in stars.indices) {
             if (i < maxStars) {
@@ -46,20 +42,15 @@ class ScoreActivity : AppCompatActivity() {
                     stars[i].setImageResource(R.drawable.star_empty)
                 }
             } else {
-                stars[i].visibility = ImageView.GONE // Ocultar estrellas no usadas
+                stars[i].visibility = ImageView.GONE
             }
         }
 
-        // Mostrar mensaje según el desempeño
         val message = when {
             earnedStars <= 0 -> "¡Oh no! Inténtalo de nuevo"
             earnedStars == maxStars -> "¡Perfecto! Excelente trabajo"
             else -> "¡Bien hecho! Sigue practicando"
         }
-
-        // Si tienes un TextView para el mensaje, puedes mostrarlo
-        // val tvMessage = findViewById<TextView>(R.id.tvMessage) // Asegúrate de tener este TextView en tu layout
-        // tvMessage.text = message
 
         btnBack.setOnClickListener {
             startActivity(Intent(this, LevelSelector::class.java))

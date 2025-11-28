@@ -13,16 +13,7 @@
         android:id="@+id/tvScoreTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="¡Puntuacion Final!"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"
-        android:textColor="#FFEB3B"/>
-
-    <TextView
-        android:id="@+id/test_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:text="Score Final"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginBottom="16dp"
@@ -38,21 +29,24 @@
 
         <ImageView
             android:id="@+id/star1"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_margin="4dp"/>
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="4dp"
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/star2"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_margin="4dp"/>
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="4dp"
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/star3"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_margin="4dp"/>
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="4dp"
+            android:visibility="gone"/>
     </LinearLayout>
 
     <Button
