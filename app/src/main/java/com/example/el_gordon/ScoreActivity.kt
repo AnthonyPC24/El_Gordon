@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.el_gordon.data.GameData
 import com.tuapp.utils.hideSystemUI
 
 class ScoreActivity : AppCompatActivity() {
@@ -15,6 +16,10 @@ class ScoreActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_resultado_nivel1)
         hideSystemUI()
+
+        val endMillis = System.currentTimeMillis()
+        val elapsedMillis = endMillis - GameData.startTimeMillis
+        val elapsedSeconds = elapsedMillis / 1000
 
         val wrongIngredientsCount = intent.getIntExtra("wrongIngredientsCount", 0)
         val difficulty = intent.getIntExtra("difficulty", 1)
@@ -46,11 +51,17 @@ class ScoreActivity : AppCompatActivity() {
             }
         }
 
-        val message = when {
-            earnedStars <= 0 -> "¡Oh no! Inténtalo de nuevo"
-            earnedStars == maxStars -> "¡Perfecto! Excelente trabajo"
-            else -> "¡Bien hecho! Sigue practicando"
+        val difficultySelected = when (difficulty) {
+            1 -> "Fácil"
+            2 -> "Medio"
+            3 -> "Difícil"
+            else -> "error"
         }
+
+        GameData.player?.difficulty = difficultySelected
+        GameData.player?.score = earnedStars
+        GameData.player?.errors = wrongIngredientsCount
+        GameData.player?.matchTime = elapsedSeconds.toString()
 
         btnBack.setOnClickListener {
             startActivity(Intent(this, LevelSelector::class.java))

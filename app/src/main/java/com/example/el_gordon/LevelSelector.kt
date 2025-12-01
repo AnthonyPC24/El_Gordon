@@ -32,8 +32,12 @@ class LevelSelector : AppCompatActivity() {
             }
         }
 
-        val btnBack = findViewById<Button>(R.id.btnBack)
+        val btnBack = findViewById<Button>(R.id.btnBackAvatarSel)
         btnBack.setOnClickListener {
+            val intent = Intent(this, AvatarSelector::class.java)
+            startActivity(intent)
+            @Suppress("DEPRECATION")
+            overridePendingTransition(0, 0)
             finish()
         }
     }

@@ -89,17 +89,17 @@
                 android:textSize="18sp"
                 app:backgroundTint="@color/dark_blue"
                 android:background="@drawable/btn_select_level" />
-
         </LinearLayout>
-
     </LinearLayout>
     <Button
-        android:id="@+id/btnBack"
+        android:id="@+id/btnBackAvatarSel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="&lt;"
-        android:textSize="24sp"
+        android:textSize="50px"
+        android:fontFamily="@font/poetsenone_regular"
         android:background="@drawable/btn_select_avatar"
+        app:backgroundTint="@color/yellow"
         android:layout_marginBottom="24dp"
         android:layout_marginStart="24dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.animation.*
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.el_gordon.PlayerNameActivity
 import com.tuapp.utils.hideSystemUI
 
 class MainActivity : AppCompatActivity() {
@@ -29,21 +28,19 @@ class MainActivity : AppCompatActivity() {
         pulse.repeatMode = Animation.REVERSE
         tvJugar.startAnimation(pulse)
 
-        // 🔹 Rebote al pulsar
         tvJugar.setOnClickListener {
             val bounce = ScaleAnimation(
                 1f, 0.8f,
                 1f, 0.8f,
                 Animation.RELATIVE_TO_SELF, 0.5f,
                 Animation.RELATIVE_TO_SELF, 0.5f
-                                       )
+            )
             bounce.duration = 100
             bounce.interpolator = BounceInterpolator()
             bounce.setAnimationListener(object : Animation.AnimationListener {
                 override fun onAnimationStart(animation: Animation?) {}
                 override fun onAnimationEnd(animation: Animation?) {
-                    // 👉 CAMBIADO: Ahora va a PlayerNameActivity en lugar de AvatarSelector
-                    startActivity(Intent(this@MainActivity, PlayerNameActivity::class.java))
+                    startActivity(Intent(this@MainActivity, PlayerNameActivity ::class.java))
                     finish()
                 }
                 override fun onAnimationRepeat(animation: Animation?) {}

@@ -14,12 +14,18 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.el_gordon.data.GameData
 import com.example.el_gordon.data.RecipeData
 import com.tuapp.utils.hideSystemUI
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import kotlin.math.cos
 import kotlin.math.sin
 
 class MixIngredients : AppCompatActivity() {
+    val dateFormat = SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.getDefault())
+    val startTime = dateFormat.format(Date())
     private val plates = mutableListOf<ImageView>()
     private val ingredientsInPlay = mutableListOf<ImageView>()
     private var wrongIngredientsCount = 0
@@ -38,6 +44,10 @@ class MixIngredients : AppCompatActivity() {
         val avatarRes = prefs.getInt("selected_avatar", R.drawable.chef_1)
         avatarView.setImageResource(avatarRes)
         // ----------------------------------------
+
+        val startMillis = System.currentTimeMillis()
+        GameData.startTimeMillis = startMillis
+        GameData.player?.startDateTime = startTime
 
         val recipeIndex = intent.getIntExtra("recipeIndex", 0)
         difficulty = intent.getIntExtra("difficulty", 1)
@@ -288,18 +298,14 @@ class MixIngredients : AppCompatActivity() {
 
         recipe.visibility = View.VISIBLE
 
-        val clampedErrors = wrongIngredientsCount.coerceIn(1, 3)
+        val clampedErrors = wrongIngredientsCount.coerceIn(0, 3)
 
         val wrongDrawableName = "recipe_wrong$clampedErrors"
         val wrongDrawableId = resources.getIdentifier(wrongDrawableName, "drawable", packageName)
 
         if (wrongDrawableId != 0) {
             recipe.setImageResource(wrongDrawableId)
-            Log.d("RECIPE_FINAL_IMAGE", "Mostrando imagen: $wrongDrawableName")
-        } else {
-            Log.e("RECIPE_FINAL_IMAGE", "No existe la imagen para $wrongDrawableName")
         }
-
 
         star.visibility = View.VISIBLE
 

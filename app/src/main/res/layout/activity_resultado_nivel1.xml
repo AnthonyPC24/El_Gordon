@@ -1,12 +1,12 @@
-<LinearLayout
-    android:id="@+id/rootLayout"
+<LinearLayout android:id="@+id/rootLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp"
-    android:background="@drawable/kitchen_entry">
+    android:background="@drawable/kitchen_entry"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     >
 
     <TextView
@@ -53,5 +53,9 @@
         android:id="@+id/btnBackToLevels"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Volver a niveles"/>
+        android:text="Nueva receta"
+        android:textSize="50px"
+        android:fontFamily="@font/poetsenone_regular"
+        android:background="@drawable/btn_select_avatar"
+        app:backgroundTint="@color/yellow"/>
 </LinearLayout>
