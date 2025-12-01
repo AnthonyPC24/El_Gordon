@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.animation.*
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.el_gordon.PlayerNameActivity
 import com.tuapp.utils.hideSystemUI
 
 class MainActivity : AppCompatActivity() {
@@ -41,8 +42,8 @@ class MainActivity : AppCompatActivity() {
             bounce.setAnimationListener(object : Animation.AnimationListener {
                 override fun onAnimationStart(animation: Animation?) {}
                 override fun onAnimationEnd(animation: Animation?) {
-                    // Abrir AvatarSelector después del rebote
-                    startActivity(Intent(this@MainActivity, AvatarSelector::class.java))
+                    // 👉 CAMBIADO: Ahora va a PlayerNameActivity en lugar de AvatarSelector
+                    startActivity(Intent(this@MainActivity, PlayerNameActivity::class.java))
                     finish()
                 }
                 override fun onAnimationRepeat(animation: Animation?) {}

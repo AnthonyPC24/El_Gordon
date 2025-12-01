@@ -4,6 +4,7 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -31,6 +32,13 @@ class MixIngredients : AppCompatActivity() {
         setContentView(R.layout.activity_mix_ingredients)
         hideSystemUI()
 
+        // --- NUEVO: mostrar avatar seleccionado ---
+        val avatarView = findViewById<ImageView>(R.id.imageViewAvatar)
+        val prefs = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        val avatarRes = prefs.getInt("selected_avatar", R.drawable.chef_1)
+        avatarView.setImageResource(avatarRes)
+        // ----------------------------------------
+
         val recipeIndex = intent.getIntExtra("recipeIndex", 0)
         difficulty = intent.getIntExtra("difficulty", 1)
         val recipeSrc = intent.getIntExtra("drawableRes", 0)
@@ -42,7 +50,7 @@ class MixIngredients : AppCompatActivity() {
         val selectedRecipe = RecipeData.getRecipes(this).getOrNull(recipeIndex)
         val allRecipeIngredients = selectedRecipe?.ingredients?.map { it.imageRes } ?: emptyList()
 
-        val character = findViewById<View>(R.id.imageView)
+        val character = findViewById<View>(R.id.imageViewAvatar)
         val text = findViewById<View>(R.id.text_icon)
         val pot = findViewById<ImageView>(R.id.pot)
         val layout = findViewById<ConstraintLayout>(R.id.constraintLayout)

@@ -10,11 +10,11 @@
 
     <!-- Imagen del avatar -->
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewAvatar"
         android:layout_width="350dp"
         android:layout_height="500dp"
         android:layout_marginStart="100dp"
-        android:contentDescription="avatar_level_selector"
+        android:contentDescription="avatar Selecionado"
         android:scaleType="fitCenter"
         android:scaleX="-1"
         android:src="@drawable/chef_1"
@@ -30,7 +30,7 @@
         android:orientation="vertical"
         android:padding="24dp"
         android:gravity="center_horizontal"
-        app:layout_constraintStart_toEndOf="@id/imageView"
+        app:layout_constraintStart_toEndOf="@id/imageViewAvatar"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

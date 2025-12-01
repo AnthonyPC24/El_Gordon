@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp"
+    android:background="@drawable/kitchen_entry">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¡Ingresa tu nombre cocinero!"
+        android:textSize="32sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/poetsenone_regular"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingresa tu nombre"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="@font/poetsenone_regular"
+        />
+
+    <EditText
+        android:id="@+id/etNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre del Cocinero"
+        android:textColorHint="#BBDEFB"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:padding="16dp"
+        android:textSize="18sp"
+        android:inputType="textPersonName"
+        android:maxLines="1"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/poetsenone_regular"
+        />
+
+    <Button
+        android:id="@+id/btnComenzar"
+        android:layout_width="262dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_orange_light"
+        android:fontFamily="@font/poetsenone_regular"
+        android:padding="16dp"
+        android:text="COMENZAR"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+</LinearLayout>

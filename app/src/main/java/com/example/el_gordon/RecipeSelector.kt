@@ -1,6 +1,7 @@
 package com.example.el_gordon
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
@@ -16,6 +17,13 @@ class RecipeSelector : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe_selector)
         hideSystemUI()
+
+        // Recuperar avatar seleccionado de SharedPreferences
+        val prefs = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        val selectedAvatar = prefs.getInt("selected_avatar", R.drawable.chef_1)
+        val avatarImageView = findViewById<ImageView>(R.id.imageViewAvatar)
+        avatarImageView.setImageResource(selectedAvatar)
+
 
         val difficulty = intent.getIntExtra("level", 1)
         val grid = findViewById<GridLayout>(R.id.gridRecetas)
@@ -67,6 +75,7 @@ class RecipeSelector : AppCompatActivity() {
                             intent.putExtra("recipeIndex", index)
                             intent.putExtra("difficulty", difficulty)
                             intent.putExtra("drawableRes", drawableRes)
+                            intent.putExtra("selected_avatar", selectedAvatar)
 
                             startActivity(intent)
                             overridePendingTransition(0, 0)
