@@ -18,7 +18,6 @@ class RecipeSelector : AppCompatActivity() {
         setContentView(R.layout.activity_recipe_selector)
         hideSystemUI()
 
-        // Recuperar avatar seleccionado de SharedPreferences
         val prefs = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val selectedAvatar = prefs.getInt("selected_avatar", R.drawable.chef_1)
         val avatarImageView = findViewById<ImageView>(R.id.imageViewAvatar)
@@ -78,6 +77,7 @@ class RecipeSelector : AppCompatActivity() {
                             intent.putExtra("selected_avatar", selectedAvatar)
 
                             startActivity(intent)
+                            @Suppress("DEPRECATION")
                             overridePendingTransition(0, 0)
                             finish()
                         }

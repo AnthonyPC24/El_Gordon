@@ -16,10 +16,9 @@ class MainActivity : AppCompatActivity() {
 
         val tvJugar = findViewById<TextView>(R.id.tvJugar)
 
-        // 🔹 Animación de pulso infinito
         val pulse = ScaleAnimation(
-            1f, 1.1f, // escala X
-            1f, 1.1f, // escala Y
+            1f, 1.1f,
+            1f, 1.1f,
             Animation.RELATIVE_TO_SELF, 0.5f,
             Animation.RELATIVE_TO_SELF, 0.5f
                                   )
@@ -41,6 +40,8 @@ class MainActivity : AppCompatActivity() {
                 override fun onAnimationStart(animation: Animation?) {}
                 override fun onAnimationEnd(animation: Animation?) {
                     startActivity(Intent(this@MainActivity, PlayerNameActivity ::class.java))
+                    @Suppress("DEPRECATION")
+                    overridePendingTransition(0, 0)
                     finish()
                 }
                 override fun onAnimationRepeat(animation: Animation?) {}

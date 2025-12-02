@@ -8,12 +8,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.el_gordon.AvatarSelector
 import com.example.el_gordon.R
+import com.example.el_gordon.data.GameData
+import com.example.el_gordon.models.Player
+import com.tuapp.utils.hideSystemUI
 
 class PlayerNameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player_name)
+        hideSystemUI()
 
         val etNombre = findViewById<EditText>(R.id.etNombre)
         val btnComenzar = findViewById<Button>(R.id.btnComenzar)
@@ -22,10 +26,23 @@ class PlayerNameActivity : AppCompatActivity() {
             val nombre = etNombre.text.toString()
 
             if (nombre.isNotEmpty()) {
-                // Pasar el nombre al AvatarSelector
+                GameData.player = Player(
+                    playerName = nombre,
+                    avatar = null,
+                    numQuestions = null,
+                    difficulty = null,
+                    score = null,
+                    errors = null,
+                    matchTime = null,
+                    startDateTime = null
+                )
+
+                GameData.player?.playerName = nombre
+
                 val intent = Intent(this, AvatarSelector::class.java)
-                intent.putExtra("PLAYER_NAME", nombre)
                 startActivity(intent)
+                @Suppress("DEPRECATION")
+                overridePendingTransition(0, 0)
                 finish()
             } else {
                 Toast.makeText(this, "Por favor ingresa tu nombre", Toast.LENGTH_SHORT).show()

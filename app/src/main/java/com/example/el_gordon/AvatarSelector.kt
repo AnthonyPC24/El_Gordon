@@ -8,7 +8,6 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.el_gordon.data.GameData
-import com.example.el_gordon.models.Player
 import com.tuapp.utils.hideSystemUI
 
 class AvatarSelector : AppCompatActivity() {
@@ -49,6 +48,8 @@ class AvatarSelector : AppCompatActivity() {
 
         btnSelect.setOnClickListener {
             val selectedAvatar = images[currentIndex]
+
+            GameData.player?.avatar = selectedAvatar
 
             val prefs = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
             prefs.edit().putInt("selected_avatar", selectedAvatar).apply()

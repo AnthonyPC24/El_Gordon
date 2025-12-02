@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.el_gordon.data.GameData
+import com.example.el_gordon.util.JsonWriter
 import com.tuapp.utils.hideSystemUI
 
 class ScoreActivity : AppCompatActivity() {
@@ -62,6 +62,9 @@ class ScoreActivity : AppCompatActivity() {
         GameData.player?.score = earnedStars
         GameData.player?.errors = wrongIngredientsCount
         GameData.player?.matchTime = elapsedSeconds.toString()
+
+        val jsonWriter = JsonWriter(this)
+        jsonWriter.saveGameDataToJson()
 
         btnBack.setOnClickListener {
             startActivity(Intent(this, LevelSelector::class.java))

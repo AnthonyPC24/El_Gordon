@@ -13,7 +13,6 @@ class LevelSelector : AppCompatActivity() {
         setContentView(R.layout.activity_level_selector)
         hideSystemUI()
 
-        // Obtener el avatar seleccionado desde el Intent
         val selectedAvatar = intent.getIntExtra("avatar_selected", -1)
         val avatarImageView = findViewById<ImageView>(R.id.imageViewAvatar)
         if (selectedAvatar != -1) {
@@ -24,7 +23,7 @@ class LevelSelector : AppCompatActivity() {
             findViewById<Button>(R.id.btnNivel1) to 1,
             findViewById<Button>(R.id.btnNivel2) to 2,
             findViewById<Button>(R.id.btnNivel3) to 3
-                           )
+        )
 
         levels.forEach { (button, level) ->
             button.setOnClickListener {
@@ -45,7 +44,7 @@ class LevelSelector : AppCompatActivity() {
     private fun openRecipeSelector(level: Int, avatar: Int) {
         val intent = Intent(this, RecipeSelector::class.java)
         intent.putExtra("level", level)
-        intent.putExtra("avatar_selected", avatar) // Pasar avatar a RecipeSelector
+        intent.putExtra("avatar_selected", avatar)
         startActivity(intent)
         @Suppress("DEPRECATION")
         overridePendingTransition(0, 0)

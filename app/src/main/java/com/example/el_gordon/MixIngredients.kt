@@ -45,9 +45,9 @@ class MixIngredients : AppCompatActivity() {
         avatarView.setImageResource(avatarRes)
         // ----------------------------------------
 
-        val startMillis = System.currentTimeMillis()
-        GameData.startTimeMillis = startMillis
+        val startTime = SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.getDefault()).format(Date())
         GameData.player?.startDateTime = startTime
+        GameData.startTimeMillis = System.currentTimeMillis()
 
         val recipeIndex = intent.getIntExtra("recipeIndex", 0)
         difficulty = intent.getIntExtra("difficulty", 1)
@@ -72,7 +72,7 @@ class MixIngredients : AppCompatActivity() {
             R.drawable.ing_sock,
             R.drawable.ing_rock,
             R.drawable.ing_excrement
-                               )
+        )
 
         text.animate()
             .alpha(0f)
@@ -377,6 +377,8 @@ class MixIngredients : AppCompatActivity() {
             intent.putExtra("wrongIngredientsCount", wrongIngredientsCount)
             intent.putExtra("difficulty", difficulty)
             startActivity(intent)
+            @Suppress("DEPRECATION")
+            overridePendingTransition(0, 0)
             finish()
         }
     }
