@@ -50,6 +50,7 @@
             android:layout_marginBottom="24dp"/>
 
         <LinearLayout
+            android:id="@+id/layoutBtnStars"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -58,37 +59,78 @@
             android:baselineAligned="false">
 
             <!-- Botón 1 -->
-            <Button
+            <LinearLayout
                 android:id="@+id/btnNivel1"
                 android:layout_width="250dp"
                 android:layout_height="65dp"
-                android:text="🌟"
-                android:textSize="18sp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:backgroundTint="@color/dark_blue"
                 android:background="@drawable/btn_select_level"
-                app:backgroundTint="@color/dark_blue"
-                />
+                android:padding="8dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/star"/>
+            </LinearLayout>
 
             <!-- Botón 2 -->
-            <Button
+            <LinearLayout
                 android:id="@+id/btnNivel2"
                 android:layout_width="250dp"
                 android:layout_height="65dp"
-                android:text="🌟  🌟"
-                android:textSize="18sp"
-                android:layout_marginTop="75dp"
-                android:layout_marginBottom="75dp"
-                app:backgroundTint="@color/dark_blue"
-                android:background="@drawable/btn_select_level" />
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:backgroundTint="@color/dark_blue"
+                android:background="@drawable/btn_select_level"
+                android:padding="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginTop="75dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/star"/>
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/star"/>
+            </LinearLayout>
 
             <!-- Botón 3 -->
-            <Button
+            <LinearLayout
                 android:id="@+id/btnNivel3"
                 android:layout_width="250dp"
                 android:layout_height="65dp"
-                android:text=" 🌟  🌟  🌟 "
-                android:textSize="18sp"
-                app:backgroundTint="@color/dark_blue"
-                android:background="@drawable/btn_select_level" />
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:backgroundTint="@color/dark_blue"
+                android:background="@drawable/btn_select_level"
+                android:padding="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginTop="75dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/star"/>
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/star"/>
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/star"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
     <Button

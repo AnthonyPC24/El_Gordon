@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
             1f, 1.1f,
             Animation.RELATIVE_TO_SELF, 0.5f,
             Animation.RELATIVE_TO_SELF, 0.5f
-                                  )
+        )
         pulse.duration = 500
         pulse.repeatCount = Animation.INFINITE
         pulse.repeatMode = Animation.REVERSE

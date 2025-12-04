@@ -46,7 +46,7 @@ class MixIngredients : AppCompatActivity() {
         // ----------------------------------------
 
         val startTime = SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.getDefault()).format(Date())
-        GameData.player?.startDateTime = startTime
+        GameData.player?.fechaHorainicio = startTime
         GameData.startTimeMillis = System.currentTimeMillis()
 
         val recipeIndex = intent.getIntExtra("recipeIndex", 0)

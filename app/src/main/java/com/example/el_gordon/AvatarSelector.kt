@@ -3,6 +3,7 @@ package com.example.el_gordon
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -48,13 +49,13 @@ class AvatarSelector : AppCompatActivity() {
 
         btnSelect.setOnClickListener {
             val selectedAvatar = images[currentIndex]
-
             GameData.player?.avatar = selectedAvatar
 
             val prefs = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
             prefs.edit().putInt("selected_avatar", selectedAvatar).apply()
 
             val intent = Intent(this, LevelSelector::class.java)
+            intent.putExtra("avatar_selected", selectedAvatar)
             startActivity(intent)
             @Suppress("DEPRECATION")
             overridePendingTransition(0, 0)

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.widget.GridLayout
 import android.widget.ImageView
@@ -22,7 +23,6 @@ class RecipeSelector : AppCompatActivity() {
         val selectedAvatar = prefs.getInt("selected_avatar", R.drawable.chef_1)
         val avatarImageView = findViewById<ImageView>(R.id.imageViewAvatar)
         avatarImageView.setImageResource(selectedAvatar)
-
 
         val difficulty = intent.getIntExtra("level", 1)
         val grid = findViewById<GridLayout>(R.id.gridRecetas)

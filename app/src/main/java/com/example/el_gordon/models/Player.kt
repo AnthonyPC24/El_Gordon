@@ -4,11 +4,11 @@ import java.io.Serializable
 
 data class Player(
     var avatar: Int? = null,
-    var playerName: String = "",
-    var numQuestions: Int? = null,
-    var difficulty: String? = null,
-    var score: Int? = null,
-    var errors: Int? = null,
-    var matchTime: String? = null,
-    var startDateTime: String? = null
+    var nombreJugador: String = "",
+    var numPreguntas: Int? = null,
+    var dificultad: String? = null,
+    var puntuacion: Int? = null,
+    var errores: Int? = null,
+    var tiempoPartida: String? = null,
+    var fechaHorainicio: String? = null
 ) : Serializable

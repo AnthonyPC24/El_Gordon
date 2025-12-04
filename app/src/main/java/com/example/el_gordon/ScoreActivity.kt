@@ -58,10 +58,10 @@ class ScoreActivity : AppCompatActivity() {
             else -> "error"
         }
 
-        GameData.player?.difficulty = difficultySelected
-        GameData.player?.score = earnedStars
-        GameData.player?.errors = wrongIngredientsCount
-        GameData.player?.matchTime = elapsedSeconds.toString()
+        GameData.player?.dificultad = difficultySelected
+        GameData.player?.puntuacion = earnedStars
+        GameData.player?.errores = wrongIngredientsCount
+        GameData.player?.tiempoPartida = elapsedSeconds.toString()
 
         val jsonWriter = JsonWriter(this)
         jsonWriter.saveGameDataToJson()
