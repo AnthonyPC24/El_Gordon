@@ -16,8 +16,7 @@ class AvatarSelector : AppCompatActivity() {
     private val images = listOf(
         R.drawable.chef_1,
         R.drawable.chef_2,
-        R.drawable.chef_3,
-        R.drawable.chef_4)
+        R.drawable.chef_3)
 
     private var currentIndex = 0
 
